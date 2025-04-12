@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ../backend
+      dockerfile: ../docker/Dockerfile.backend
+    ports:
+      - "3000:3000"
+    networks:
+      - vote-network
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: ../docker/Dockerfile.frontend
+    ports:
+      - "8080:8080"
+    networks:
+      - vote-network
+
+networks:
+  vote-network:
+    driver: bridge
