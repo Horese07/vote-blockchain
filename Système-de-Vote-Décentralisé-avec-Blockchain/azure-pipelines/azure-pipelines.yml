@@ -1,0 +1,58 @@
+# azure-pipelines.yml
+
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '14.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    cd backend
+    npm install
+  displayName: 'Install Backend Dependencies'
+
+- script: |
+    cd frontend
+    npm install
+  displayName: 'Install Frontend Dependencies'
+
+- script: |
+    cd backend
+    npm run test
+  displayName: 'Run Backend Tests'
+
+- script: |
+    cd frontend
+    npm run test
+  displayName: 'Run Frontend Tests'
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'yourContainerRegistryServiceConnection'
+    repository: 'yourRepositoryName'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile.backend'
+    tags: |
+      $(Build.BuildId)
+
+- task: Docker@2
+  inputs:
+    containerRegistry: 'yourContainerRegistryServiceConnection'
+    repository: 'yourRepositoryName'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile.frontend'
+    tags: |
+      $(Build.BuildId)
+
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'yourAzureSubscription'
+    appName: 'yourAppName'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    deploymentMethod: 'auto'
