@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify CIN</title>
+</head>
+<body>
+  <h1>Verify Your CIN</h1>
+  <form id="verifyForm">
+    <label for="cin">CIN:</label>
+    <input type="text" id="cin" name="cin" required><br><br>
+    <label for="code">Verification Code:</label>
+    <input type="text" id="code" name="code" required><br><br>
+    <button type="submit">Verify</button>
+  </form>
+
+  <h3>Response:</h3>
+  <pre id="response"></pre>
+
+  <script>
+    document.getElementById('verifyForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const cin = document.getElementById('cin').value;
+      const code = document.getElementById('code').value;
+
+      fetch('http://localhost:3000/verify', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ cin, code })
+      })
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('response').textContent = JSON.stringify(data, null, 2);
+      })
+      .catch(error => {
+        document.getElementById('response').textContent = 'Error: ' + error.message;
+      });
+    });
+  </script>
+</body>
+</html>
