@@ -1,0 +1,81 @@
+{
+	"name": "purity-dashboard-react",
+	"version": "2.0.2",
+	"private": true,
+	"dependencies": {
+		"@chakra-ui/icons": "^2.0.0",
+		"@chakra-ui/react": "2.0.0",
+		"@chakra-ui/system": "^2.0.0",
+		"@chakra-ui/theme-tools": "^2.0.0",
+		"@emotion/cache": "^11.10.0",
+		"@emotion/react": "^11.10.0",
+		"@emotion/styled": "^11.10.0",
+		"@fontsource/open-sans": "^4.5.0",
+		"@fontsource/raleway": "^4.5.0",
+		"@fontsource/roboto": "^4.5.8",
+		"ajv": "^8.17.1",
+		"apexcharts": "^4.0.0",
+		"classnames": "2.3.1",
+		"cross-env": "^7.0.3",
+		"framer-motion": "^4.1.17",
+		"match-sorter": "6.3.0",
+		"moment": "^2.30.1",
+		"nouislider": "15.0.0",
+		"purity-dashboard-react": "file:",
+		"react": "18.2.0",
+		"react-apexcharts": "^1.7.0",
+		"react-big-calendar": "0.33.2",
+		"react-bootstrap-sweetalert": "5.2.0",
+		"react-datetime": "3.1.1",
+		"react-dom": "18.2.0",
+		"react-github-btn": "^1.2.1",
+		"react-icons": "^4.2.0",
+		"react-jvectormap": "0.0.16",
+		"react-router-dom": "5.2.1",
+		"react-scripts": "^5.0.1",
+		"react-swipeable-views": "^0.14.0",
+		"react-table": "7.7.0",
+		"react-tagsinput": "3.19.0",
+		"sass": "^1.87.0",
+		"serialize-javascript": "^6.0.2",
+		"stylis": "^4.0.13",
+		"stylis-plugin-rtl": "^2.1.1"
+	},
+	"resolutions": {
+		"react-error-overlay": "6.0.11"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "cross-env CI=false cross-env PUBLIC_URL=/ react-scripts build && gulp licenses",
+		"test": "react-scripts test --env=jsdom",
+		"eject": "react-scripts eject",
+		"deploy": "npm run build",
+		"lint:check": "eslint . --ext=js,jsx;  exit 0",
+		"lint:fix": "eslint . --ext=js,jsx --fix;  exit 0",
+		"install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start"
+	},
+	"optionalDependencies": {
+		"@babel/core": "7.14.0",
+		"typescript": "4.2.4"
+	},
+	"devDependencies": {
+		"@babel/plugin-transform-react-jsx-source": "^7.14.5",
+		"gulp": "^5.0.0",
+		"gulp-append-prepend": "1.0.9",
+		"typescript": "^4.9.0",
+        "@types/react-dom": "^18.0.0",
+        "prettier": "^2.8.0"
+	},
+	"browserslist": {
+		"production": [
+			"cover 99.8%",
+			"not dead",
+			"not OperaMini all"
+		],
+		"development": [
+			"cover 99.8%",
+			"not dead",
+			"not OperaMini all"
+		]
+	}
+}
