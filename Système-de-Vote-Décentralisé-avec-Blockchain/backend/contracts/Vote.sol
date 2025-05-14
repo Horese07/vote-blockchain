@@ -89,6 +89,23 @@ contract Vote {
 
         return (voteCounts, candidateNames);
     }
+    function getLiveVotes(uint _electionId) public view returns (uint[] memory, string[] memory) {
+        require(elections[_electionId].isActive, "Election must be active");
+
+        uint candidatesCount = elections[_electionId].candidatesCount;
+        uint[] memory voteCounts = new uint[](candidatesCount);
+        string[] memory candidateNames = new string[](candidatesCount);
+
+        for (uint i = 1; i <= candidatesCount; i++) {
+             Candidate memory candidate = elections[_electionId].candidates[i];
+             voteCounts[i - 1] = candidate.voteCount;
+             candidateNames[i - 1] = candidate.name;
+        }
+
+        return (voteCounts, candidateNames);
+    }
+
+
 
     function endElection(uint _electionId) public {
         require(elections[_electionId].isActive, "Election is already ended");
